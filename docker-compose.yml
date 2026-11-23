@@ -1,0 +1,26 @@
+services:
+  hue-bridge-esp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hue-bridge-esp
+    # Host networking is strongly recommended on Linux / NAS servers so
+    # mDNS (_hue._tcp on UDP 5353) and SSDP (UDP 1900) multicast reach the
+    # native Philips Hue app and ESP32 boards on your LAN.
+    # On Docker Desktop (Windows/macOS), host multicast is isolated in the VM;
+    # run Node.js directly on the host or use bridge port mappings with manual IP entry.
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+    environment:
+      - BRIDGE_NAME=${BRIDGE_NAME:-HueBridge ESP}
+      - BRIDGE_MAC=${BRIDGE_MAC:-}
+      - BIND_IP=${BIND_IP:-}
+      - HTTP_PORT=${HTTP_PORT:-80}
+      - HTTPS_PORT=${HTTPS_PORT:-443}
+      - UI_PORT=${UI_PORT:-3000}
+      - DATA_DIR=/app/data
+      - ENABLE_DISCOVERY=${ENABLE_DISCOVERY:-true}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+

@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <defs>
+    <pattern id="lightGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="rgbGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="33%" stop-color="#f59e0b"/>
+      <stop offset="66%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="whiteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Crisp Light Background -->
+  <rect width="1200" height="690" fill="#ffffff"/>
+  <rect width="1200" height="690" fill="url(#lightGrid)" opacity="0.65"/>
+
+  <!-- Header -->
+  <rect x="24" y="14" width="1152" height="58" rx="10" fill="#0f172a"/>
+  <text x="44" y="40" fill="#ffffff" font-size="20" font-weight="700">HUEBRIDGE ESP — 24V / 12V / 5V WIRING DIAGRAM</text>
+  <text x="44" y="60" fill="#cbd5e1" font-size="13">NodeMCU-32S v1.1 • 24V RGB Strip (60 LEDs / 20 Zones) + 12V 2-Wire White Strip • 24V Adapter</text>
+
+  <!-- ==================== WIRING ROUTES ==================== -->
+
+  <!-- +24V Distribution Rail (x=240) -->
+  <path d="M 200 295 L 240 295" fill="none" stroke="#b91c1c" stroke-width="5"/>
+  <path d="M 240 115 L 240 495" fill="none" stroke="#b91c1c" stroke-width="5"/>
+  <circle cx="240" cy="295" r="6" fill="#b91c1c"/>
+
+  <!-- +24V Top to 24V RGB Strip -->
+  <path d="M 240 115 L 845 115" fill="none" stroke="#b91c1c" stroke-width="4.5"/>
+
+  <!-- +24V Middle to Buck #1 IN+ (hops over GND rail at x=285) -->
+  <path d="M 240 295 L 277 295 A 8 8 0 0 1 293 295 L 330 295" fill="none" stroke="#b91c1c" stroke-width="4"/>
+
+  <!-- +24V Bottom to Buck #2 IN+ (hops over GND rail at x=285) -->
+  <path d="M 240 495 L 277 495 A 8 8 0 0 1 293 495 L 330 495" fill="none" stroke="#b91c1c" stroke-width="4"/>
+
+  <!-- Common GND Rail (x=285) -->
+  <path d="M 200 365 L 232 365 A 8 8 0 0 1 248 365 L 285 365" fill="none" stroke="#334155" stroke-width="5"/>
+  <path d="M 285 198 L 285 555" fill="none" stroke="#334155" stroke-width="5"/>
+  <circle cx="285" cy="365" r="6" fill="#334155"/>
+
+  <!-- GND Top to 24V RGB Strip -->
+  <path d="M 285 198 L 845 198" fill="none" stroke="#334155" stroke-width="4.5"/>
+
+  <!-- GND Middle to Buck #1 IN- -->
+  <path d="M 285 365 L 330 365" fill="none" stroke="#334155" stroke-width="4"/>
+
+  <!-- GND Bottom to Buck #2 IN- -->
+  <path d="M 285 555 L 330 555" fill="none" stroke="#334155" stroke-width="4"/>
+
+  <!-- Buck #1 (5V) to NodeMCU -->
+  <path d="M 470 295 L 515 295" fill="none" stroke="#e11d48" stroke-width="4"/>
+  <path d="M 470 365 L 515 365" fill="none" stroke="#334155" stroke-width="4"/>
+
+  <!-- Buck #2 (12V) to MOSFET Dimmer -->
+  <path d="M 470 495 L 515 495" fill="none" stroke="#ea580c" stroke-width="4.5"/>
+  <path d="M 470 555 L 515 555" fill="none" stroke="#334155" stroke-width="4.5"/>
+
+  <!-- RGB Data: NodeMCU Pin 26 (IO4) -> hops GND at y=198 -> 330 Ohm -> RGB DIN -->
+  <path d="M 730 295 L 755 295 L 755 206 A 8 8 0 0 1 755 190 L 755 156 L 774 156" fill="none" stroke="#0284c7" stroke-width="4"/>
+  <path d="M 824 156 L 845 156" fill="none" stroke="#0284c7" stroke-width="4"/>
+
+  <!-- White PWM: NodeMCU Pin 27 (IO16) -> routed cleanly between boxes -> MOSFET PWM IN -->
+  <path d="M 730 365 L 755 365 L 755 432 L 622 432 L 622 455" fill="none" stroke="#7c3aed" stroke-width="4"/>
+
+  <!-- MOSFET OUT+ (12V) & OUT- (Dimmed -) to 12V White Strip -->
+  <path d="M 730 495 L 845 495" fill="none" stroke="#ea580c" stroke-width="4.5"/>
+  <path d="M 730 555 L 845 555" fill="none" stroke="#d97706" stroke-width="4.5"/>
+
+  <!-- WAGO Splitter Pills -->
+  <rect x="206" y="82" width="70" height="22" rx="6" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.5"/>
+  <text x="241" y="97" text-anchor="middle" fill="#991b1b" font-size="12" font-weight="700">+24V Split</text>
+
+  <rect x="252" y="164" width="68" height="22" rx="6" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/>
+  <text x="286" y="179" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="700">GND Split</text>
+
+  <!-- ==================== COMPONENT BLOCKS ==================== -->
+
+  <!-- 1. 24V Power Adapter -->
+  <rect x="24" y="236" width="176" height="175" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text x="112" y="264" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="700">24V DC Adapter</text>
+  <text x="112" y="284" text-anchor="middle" fill="#475569" font-size="12.5">24V 1A on hand (24W)</text>
+  <rect x="38" y="318" width="90" height="32" rx="6" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="83" y="339" text-anchor="middle" fill="#1e293b" font-size="12.5" font-weight="600">Wall Plug</text>
+  <text x="112" y="395" text-anchor="middle" fill="#64748b" font-size="12">2–3A for max brightness</text>
+  <circle cx="200" cy="295" r="6" fill="#b91c1c"/>
+  <text x="187" y="300" text-anchor="end" fill="#991b1b" font-size="13.5" font-weight="700">+24V</text>
+  <circle cx="200" cy="365" r="6" fill="#334155"/>
+  <text x="187" y="370" text-anchor="end" fill="#334155" font-size="13.5" font-weight="700">GND</text>
+
+  <!-- 2. Buck #1: 24V -> 5V -->
+  <rect x="330" y="250" width="140" height="150" rx="10" fill="#fff1f2" stroke="#e11d48" stroke-width="2.2"/>
+  <text x="400" y="274" text-anchor="middle" fill="#881337" font-size="14" font-weight="700">Buck #1</text>
+  <text x="400" y="328" text-anchor="middle" fill="#be123c" font-size="14" font-weight="700">24V → 5.0V</text>
+  <text x="400" y="348" text-anchor="middle" fill="#64748b" font-size="12">LM2596 / XL4015</text>
+  <circle cx="330" cy="295" r="5.5" fill="#b91c1c"/>
+  <text x="340" y="300" fill="#991b1b" font-size="12" font-weight="700">24V</text>
+  <circle cx="330" cy="365" r="5.5" fill="#334155"/>
+  <text x="340" y="370" fill="#334155" font-size="12" font-weight="700">GND</text>
+  <circle cx="470" cy="295" r="5.5" fill="#e11d48"/>
+  <text x="460" y="300" text-anchor="end" fill="#be123c" font-size="12" font-weight="700">5V</text>
+  <circle cx="470" cy="365" r="5.5" fill="#334155"/>
+  <text x="460" y="370" text-anchor="end" fill="#334155" font-size="12" font-weight="700">GND</text>
+
+  <!-- 3. Buck #2: 24V -> 12V -->
+  <rect x="330" y="455" width="140" height="135" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2.2"/>
+  <text x="400" y="478" text-anchor="middle" fill="#7c2d12" font-size="14" font-weight="700">Buck #2</text>
+  <text x="400" y="524" text-anchor="middle" fill="#c2410c" font-size="14" font-weight="700">24V → 12.0V</text>
+  <text x="400" y="542" text-anchor="middle" fill="#64748b" font-size="12">LM2596 / XL4015</text>
+  <circle cx="330" cy="495" r="5.5" fill="#b91c1c"/>
+  <text x="340" y="500" fill="#991b1b" font-size="12" font-weight="700">24V</text>
+  <circle cx="330" cy="555" r="5.5" fill="#334155"/>
+  <text x="340" y="560" fill="#334155" font-size="12" font-weight="700">GND</text>
+  <circle cx="470" cy="495" r="5.5" fill="#ea580c"/>
+  <text x="460" y="500" text-anchor="end" fill="#c2410c" font-size="12" font-weight="700">12V</text>
+  <circle cx="470" cy="555" r="5.5" fill="#334155"/>
+  <text x="460" y="560" text-anchor="end" fill="#334155" font-size="12" font-weight="700">GND</text>
+
+  <!-- 4. NodeMCU-32S v1.1 -->
+  <rect x="515" y="230" width="215" height="184" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2.5"/>
+  <text x="622" y="256" text-anchor="middle" fill="#1e1b4b" font-size="15.5" font-weight="700">NodeMCU-32S v1.1</text>
+  <text x="622" y="274" text-anchor="middle" fill="#4338ca" font-size="12" font-weight="600">ESP-WROOM-32 (38-Pin)</text>
+
+  <circle cx="515" cy="295" r="6" fill="#e11d48"/>
+  <text x="527" y="300" fill="#be123c" font-size="13" font-weight="700">Pin 19: 5V</text>
+  <circle cx="515" cy="365" r="6" fill="#334155"/>
+  <text x="527" y="370" fill="#1e293b" font-size="13" font-weight="700">Pin 14: GND</text>
+
+  <circle cx="730" cy="295" r="6" fill="#0284c7"/>
+  <text x="718" y="300" text-anchor="end" fill="#0369a1" font-size="13" font-weight="700">Pin 26: IO4</text>
+  <text x="718" y="317" text-anchor="end" fill="#475569" font-size="12">RGB Data</text>
+
+  <circle cx="730" cy="365" r="6" fill="#7c3aed"/>
+  <text x="718" y="370" text-anchor="end" fill="#6d28d9" font-size="13" font-weight="700">Pin 27: IO16</text>
+  <text x="718" y="387" text-anchor="end" fill="#475569" font-size="12">White PWM</text>
+
+  <!-- 330 Ohm Resistor -->
+  <rect x="774" y="145" width="50" height="22" rx="5" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="799" y="161" text-anchor="middle" fill="#92400e" font-size="12.5" font-weight="700">330Ω</text>
+  <text x="799" y="138" text-anchor="middle" fill="#475569" font-size="12">Res.</text>
+
+  <!-- 5. 24V Addressable RGB Strip -->
+  <rect x="845" y="85" width="331" height="146" rx="12" fill="#f8fafc" stroke="#b91c1c" stroke-width="2.5"/>
+  <text x="1035" y="110" text-anchor="middle" fill="#0f172a" font-size="15.5" font-weight="700">24V RGB Addressable Strip</text>
+  <text x="1035" y="129" text-anchor="middle" fill="#475569" font-size="12.5">60 LEDs = 20 Zones (3 LEDs / IC)</text>
+
+  <circle cx="845" cy="115" r="6" fill="#b91c1c"/>
+  <text x="858" y="120" fill="#991b1b" font-size="13" font-weight="700">+24V</text>
+  <circle cx="845" cy="156" r="6" fill="#0284c7"/>
+  <text x="858" y="161" fill="#0369a1" font-size="13" font-weight="700">DIN</text>
+  <circle cx="845" cy="198" r="6" fill="#334155"/>
+  <text x="858" y="203" fill="#334155" font-size="13" font-weight="700">GND</text>
+
+  <rect x="910" y="141" width="250" height="32" rx="7" fill="#0f172a" stroke="url(#rgbGrad)" stroke-width="2.5"/>
+  <text x="1035" y="162" text-anchor="middle" fill="#ffffff" font-size="12.5" font-weight="600">[IC1: 3 LEDs] [IC2: 3] … [IC20]</text>
+
+  <rect x="910" y="183" width="250" height="32" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="1035" y="204" text-anchor="middle" fill="#92400e" font-size="12.5" font-weight="700">Firmware: Set LED_COUNT = 20</text>
+
+  <!-- 6. MOSFET Dimmer Module -->
+  <rect x="515" y="455" width="215" height="135" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.5"/>
+  <text x="622" y="484" text-anchor="middle" fill="#2e1065" font-size="15" font-weight="700">MOSFET Dimmer</text>
+  <text x="622" y="503" text-anchor="middle" fill="#5b21b6" font-size="12.5" font-weight="600">D4184 / LR7843 (5–36V)</text>
+  <text x="622" y="576" text-anchor="middle" fill="#475569" font-size="12">3.3V Logic Screw Terminals</text>
+
+  <circle cx="622" cy="455" r="6" fill="#7c3aed"/>
+  <text x="632" y="447" text-anchor="start" fill="#6d28d9" font-size="12.5" font-weight="700">PWM IN</text>
+
+  <circle cx="515" cy="495" r="6" fill="#ea580c"/>
+  <text x="527" y="500" fill="#c2410c" font-size="13" font-weight="700">DC+</text>
+  <circle cx="515" cy="555" r="6" fill="#334155"/>
+  <text x="527" y="560" fill="#1e293b" font-size="13" font-weight="700">DC-</text>
+
+  <circle cx="730" cy="495" r="6" fill="#ea580c"/>
+  <text x="718" y="500" text-anchor="end" fill="#c2410c" font-size="13" font-weight="700">OUT+</text>
+  <circle cx="730" cy="555" r="6" fill="#d97706"/>
+  <text x="718" y="560" text-anchor="end" fill="#b45309" font-size="13" font-weight="700">OUT-</text>
+
+  <!-- 7. 12V White-Only Strip (2 Cables) -->
+  <rect x="845" y="455" width="331" height="135" rx="12" fill="#f8fafc" stroke="#ca8a04" stroke-width="2.5"/>
+  <text x="1030" y="482" text-anchor="middle" fill="#0f172a" font-size="15.5" font-weight="700">12V White Strip (2 Cables)</text>
+  <text x="1030" y="502" text-anchor="middle" fill="#475569" font-size="12.5">Non-PWM Native • Smooth 0–100% Dimming</text>
+
+  <circle cx="845" cy="495" r="6" fill="#ea580c"/>
+  <text x="858" y="500" fill="#c2410c" font-size="13" font-weight="700">+12V</text>
+  <circle cx="845" cy="555" r="6" fill="#d97706"/>
+  <text x="858" y="560" fill="#b45309" font-size="13" font-weight="700">- Cable</text>
+
+  <rect x="928" y="518" width="232" height="36" rx="7" fill="#0f172a" stroke="url(#whiteGrad)" stroke-width="2.5"/>
+  <circle cx="954" cy="536" r="7" fill="#fef08a"/>
+  <circle cx="990" cy="536" r="7" fill="#fef08a"/>
+  <circle cx="1026" cy="536" r="7" fill="#fef08a"/>
+  <circle cx="1062" cy="536" r="7" fill="#fef08a"/>
+  <circle cx="1098" cy="536" r="7" fill="#fef08a"/>
+  <circle cx="1134" cy="536" r="7" fill="#fef08a"/>
+  <text x="1044" y="576" text-anchor="middle" fill="#475569" font-size="12">ESP32 Hardware PWM (5–20 kHz)</text>
+
+  <!-- ==================== FOOTER ==================== -->
+  <rect x="24" y="612" width="1152" height="62" rx="10" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <line x1="42" y1="632" x2="68" y2="632" stroke="#b91c1c" stroke-width="4.5"/>
+  <text x="74" y="636" fill="#0f172a" font-size="12" font-weight="600">+24V</text>
+
+  <line x1="126" y1="632" x2="152" y2="632" stroke="#ea580c" stroke-width="4.5"/>
+  <text x="158" y="636" fill="#0f172a" font-size="12" font-weight="600">+12V</text>
+
+  <line x1="210" y1="632" x2="236" y2="632" stroke="#e11d48" stroke-width="4.5"/>
+  <text x="242" y="636" fill="#0f172a" font-size="12" font-weight="600">+5V</text>
+
+  <line x1="290" y1="632" x2="316" y2="632" stroke="#334155" stroke-width="4.5"/>
+  <text x="322" y="636" fill="#0f172a" font-size="12" font-weight="600">Common GND</text>
+
+  <line x1="426" y1="632" x2="452" y2="632" stroke="#0284c7" stroke-width="4"/>
+  <text x="458" y="636" fill="#0f172a" font-size="12" font-weight="600">RGB Data</text>
+
+  <line x1="538" y1="632" x2="564" y2="632" stroke="#7c3aed" stroke-width="4"/>
+  <text x="570" y="636" fill="#0f172a" font-size="12" font-weight="600">White PWM</text>
+
+  <line x1="660" y1="632" x2="686" y2="632" stroke="#d97706" stroke-width="4.5"/>
+  <text x="692" y="636" fill="#0f172a" font-size="12" font-weight="600">Dimmed White (-)</text>
+
+  <text x="42" y="660" fill="#991b1b" font-size="12.5" font-weight="700">MANDATORY FIRST STEP: Dial Buck #1 to 5.0V and Buck #2 to 12.0V BEFORE connecting NodeMCU or 12V strip! Unplug 24V PSU before USB flashing.</text>
+</svg>

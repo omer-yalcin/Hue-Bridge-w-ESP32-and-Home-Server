@@ -1,0 +1,19 @@
+# Dependencies & builds
+node_modules/
+dist/
+server/dist/
+web/dist/
+
+# Runtime state & certs
+data/
+.env
+
+# Firmware build artifacts & private credentials
+firmware/.pio/
+firmware/include/config.h
+
+# Logs & OS files
+*.log
+.DS_Store
+Thumbs.db
+

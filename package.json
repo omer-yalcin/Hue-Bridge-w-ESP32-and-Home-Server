@@ -1,0 +1,22 @@
+{
+  "name": "hue-bridging",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HueBridge ESP: Emulated/Proxy Philips Hue Bridge & Home Server for ESP32 Addressable LEDs",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev:server": "npm --workspace server run dev",
+    "dev:web": "npm --workspace web run dev",
+    "build": "npm --workspace web run build && npm --workspace server run build",
+    "start": "npm --workspace server run start",
+    "test": "npm --workspace server run test",
+    "typecheck": "npm --workspace server run typecheck && npm --workspace web run typecheck"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
+
