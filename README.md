@@ -104,3 +104,9 @@ npm run build
 npm test
 ```
 
+---
+
+## AI Disclosure
+
+This project's source code (Node.js/TypeScript home server, React management dashboard, PlatformIO ESP32 firmware), automated test suite, documentation, and hardware wiring schematics were authored with AI assistance. Please review and verify all configurations—especially electrical wiring, voltage rails, and power supply ratings—before deploying or assembling hardware.
+
